@@ -505,11 +505,8 @@
 			for (var iter1 = 0; iter1 < 3; iter1++)	{
 				index = rowIndices[iter1];
 				if (this.matrix.row[row][index] != '') {
-					console.log("vec is");
-					console.log(vec);
-					console.log("end");
 					var v1 = stringtovector(vec);
-					var v2 = stringtovector(this.matrix.row[row][index]);
+					var v2 = this.matrix.row[row][index];
 					if(!(this.orthogonal(v1,v2))) return false;
 				}
 			}
@@ -517,7 +514,7 @@
 				index = colIndices[iter1];
 				if (this.matrix.col[col][index] != '') {
 					var v1 = stringtovector(vec);
-					var v2 = stringtovector(this.matrix.col[col][index]);
+					var v2 = this.matrix.col[col][index];
 
 					if(!(this.orthogonal(v1,v2))) return false;
 				}
@@ -531,7 +528,7 @@
 				var columnNumber = rowColumnNumber[1];
 				if (this.matrix.row[rowNumber][columnNumber] != '') {
 					var v1 = stringtovector(vec);
-					var v2 = stringtovector(this.matrix.row[rowNumber][columnNumber]);
+					var v2 = this.matrix.row[rowNumber][columnNumber];
 
 					if(!(this.orthogonal(v1,v2))) return false;
 				}
