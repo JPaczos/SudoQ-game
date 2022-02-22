@@ -74,10 +74,10 @@ tr:nth-child(2) input {
 }
 
 .sudoku-container .invalid {
-  border-color: #e74c3c;
+  border: 10px solid #e74c3c;
 }
 .sudoku-container .invalid:focus {
-  border-color: #e74c3c;
+  border: 10px solid #e74c3c;
 }
 
 .sudoku-container.valid-matrix {
