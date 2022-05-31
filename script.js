@@ -82,6 +82,7 @@
 		this.cellMatrix = {};
 		this.matrix = {};
 		this.validation = {};
+		this.player = 1;
 
 		this.values = [];
 
@@ -197,6 +198,7 @@
 			// Reset board validation class
 			this.table.classList.remove("valid-matrix");
 			input.classList.remove("invalid");
+			
 
 
 			//if (!util.isNumber(val)) {
@@ -210,6 +212,7 @@
 				// Indicate error
 				input.classList.toggle("invalid", !isValid);
 			}
+
 
 
 
@@ -256,11 +259,19 @@
 			this.matrix.sect[sectRow][sectCol][secIndex] = valPars;
 			
 
+
 		},
 		
 		onMouseDown: function(e) {
 			var t = e.target;
-			
+			if (this.player == 1){
+				document.getElementById("status").innerHTML = "2";
+				this.player = 2;
+			}  else {
+				document.getElementById("status").innerHTML = "1";
+				this.player = 1
+			}
+
 			if ( t.nodeName === "INPUT" && t.classList.contains("disabled") ) {
 				e.preventDefault();
 			}
