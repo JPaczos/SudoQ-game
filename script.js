@@ -503,6 +503,11 @@
 			var sec = this.secNumberIndex(row, col);
 			// providing list of indices with exclusion of the element
 			// we are checking
+			var v1 = stringtovector(vec);
+			if (v1 == false){
+				return false;
+			}
+
 			const rowIndices = [0, 1, 2, 3];
 			var index = rowIndices.indexOf(col); // all in row apart from the same col
 			if (index > -1) rowIndices.splice(index, 1);
@@ -511,6 +516,7 @@
 			if (index > -1) colIndices.splice(index, 1);
 			const secIndices = [0, 1, 2, 3];
 			index = secIndices.indexOf(this.secPos(row,col));
+			console.log(this.matrix);
 			if (index > -1) secIndices.splice(index, 1);
 			// iterating over all possible indices and checking orthogonality
 			for (var iter1 = 0; iter1 < 3; iter1++)	{
@@ -924,7 +930,13 @@
 	 */
 	function stringtovector(str) {
 		let vec = [0,0,0,0];
-		const found = str.match(/[1-4\+\-]/g); //removes everything apart from +/-,1,2,3,4
+		console.log(str);
+		const found = str.match(/^[1-4]|[\+\-]|[1-4]$/g); //removes everything apart from +/-,1,2,3,4
+		console.log(found);
+		if (!found){
+			return false; 
+		}
+
 		if(/[1-4]/.test(found[0])) found.unshift("+"); // if there's no "+" at the beginning, add it
 		for(let i=1; i<found.length; i+=2) {
 			if(/[1]/.test(found[i])) {if(found[i-1] == "+"){vec[0] += 1} else{vec[0] += -1}}

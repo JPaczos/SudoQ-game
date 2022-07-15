@@ -1,7 +1,7 @@
 if (typeof module === "object" && typeof module.exports === "object") module.exports = Lexer;
 
 Lexer.defunct = function (char) {
-    throw new Error("Unexpected character at index " + (this.index - 1) + ": " + char);
+    //throw new Error("Unexpected character at index " + (this.index - 1) + ": " + char);
 };
 
 function Lexer(defunct) {
