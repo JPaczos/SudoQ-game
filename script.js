@@ -1033,7 +1033,7 @@
 				divs = this.game.table_ket.getElementsByTagName("div"),
 				difficulties = {
 					"easy": 8,
-					"normal": 7,
+					"normal": 0,
 					"hard": 6,
 				};
 

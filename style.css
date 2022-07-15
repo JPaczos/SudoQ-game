@@ -95,3 +95,7 @@ tr:nth-child(2) input {
   align-items: center;
   justify-content: center;
 }
+
+.rule {
+  color: white;
+}
