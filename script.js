@@ -83,6 +83,7 @@
 		this.matrix = {};
 		this.validation = {};
 		this.player = 1;
+		this.counter = 1;
 
 		this.values = [];
 
@@ -265,11 +266,18 @@
 		onMouseDown: function(e) {
 			var t = e.target;
 			if (this.player == 1){
-				document.getElementById("status").innerHTML = "2";
+				document.getElementById("status").innerHTML = "A";
 				this.player = 2;
-			}  else {
-				document.getElementById("status").innerHTML = "1";
-				this.player = 1
+				this.counter += 1;
+			} else {
+				if (this.counter == 2) {
+					this.player = 2;
+				} else {
+					this.player = 1;
+				}
+				document.getElementById("status").innerHTML = "B";
+
+				this.counter += 1;
 			}
 
 			if ( t.nodeName === "INPUT" && t.classList.contains("disabled") ) {
