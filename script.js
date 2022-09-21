@@ -382,7 +382,29 @@
 			if (vector !== "") {
 				// Validate value
 				isValid = this.validate(rowID, colID, vector);
-				console.log(isValid);
+
+				var arr = this.generateAllStates()
+
+				for (var row = 0; row < 3; row++) {
+					for (var col = 0; col < 4; col++) {
+						var val = this.matrix.row[row][col];
+						if (val == ''){
+							var counter = 0
+							for (var i= 0; i < arr.length; i++){
+								if (this.validate(row, col, vectorToStringNoKet(arr[i]))){
+									counter += 1
+								}
+							} 
+							if (counter == 0){
+								var disabled = false; 
+								this.cellMatrix[row][col].classList.toggle("disable", !disabled);
+							}
+
+						} 
+
+					}
+				}
+
 				// Insert new value into validation array even if it isn't
 				// valid. This is on purpose: If there are two vectors in the
 				// same row/col/section and one is replaced, the other still
@@ -524,7 +546,6 @@
 			if (index > -1) colIndices.splice(index, 1);
 			const secIndices = [0, 1, 2, 3];
 			index = secIndices.indexOf(this.secPos(row,col));
-			console.log(this.matrix);
 			if (index > -1) secIndices.splice(index, 1);
 			// iterating over all possible indices and checking orthogonality
 			for (var iter1 = 0; iter1 < 3; iter1++)	{
@@ -559,7 +580,26 @@
 				}
 			}
 
+
 			return true;
+		},
+		generateAllStates: function() {
+			var elements = [-1, 0, 1];
+			var results = [];
+			for (var r1 = 0; r1 < 3; r1++) {
+				for (var r2 = 0; r2 < 3; r2++) {
+					for (var r3 = 0; r3 < 3; r3++) {
+						for (var r4 = 0; r4 < 3; r4++) {
+							if (r1 == 1 && r2 == 1 & r3 == 1 && r4 == 1){
+								continue
+							} else {
+								results.push([elements[r1], elements[r2], elements[r3], elements[r4]])
+							}
+						}
+					}
+				}
+			}
+			return results;
 		},
 
 		/**
@@ -930,6 +970,27 @@
 	}
 
 	/**
+	 * Converts vector to string
+	 * e.g. [1,1,-1,1]->$1+2-3+4$
+	 */
+	function vectorToStringNoKet(vec) {
+	var str = "";
+	for(let i=0; i<vec.length; i++) {
+		if(i>0 && vec[i] == 1) {
+			str += "+";
+		}
+		if(i>0 && vec[i] == -1) {
+			str += "-";
+		}
+		if(vec[i]!=0) {
+			str += "" + (i+1).toString();
+		}
+	}
+		str += "";
+		return str;
+	}
+
+	/**
 	 * Converts strings to vectors,
 	 * e.g. $\ket{1}+\ket{2}-\ket{3}+\ket{4}$ -> [1,1,-1,1]
 	 *
@@ -1101,7 +1162,7 @@
 		 */
 		validate: function() {
 			var isValid;
-
+			
 			isValid = this.game.validateMatrix();
 			this.game.table.classList.toggle("valid-matrix", isValid);
 		},
