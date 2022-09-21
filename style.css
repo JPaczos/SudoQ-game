@@ -70,6 +70,10 @@ tr:nth-child(2) input {
   border-color: #29B6F6;
 }
 
+.sudoku-container .disable {
+  border: 5px solid yellow;
+}
+
 .sudoku-container .invalid {
   border: 5px solid #e74c3c;
 }
